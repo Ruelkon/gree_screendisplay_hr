@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <apis>
+        <type id="std_api"> <!-- 接口类型，用id区分 -->
+            <api id="dmp"> <!-- 某类型下有不同配置的接口也使用id区分，id为该API URL中的特有部分，把整个URL放里也可以 -->
+                <method>get</method> <!-- 请求方法 -->
+                <Content-Type>application/json</Content-Type> <!-- content-type -->
+                <params>offset count</params> <!-- 请求参数 -->
+                <auth> <!-- 认证信息 -->
+                    <username>bdcUser4_api</username> <!-- 用户名 -->
+                    <password>bigdata04#2020</password> <!-- 密码 -->
+                    <secureKey>h4R35Q8rYdAXls71</secureKey> <!-- 密钥 -->
+                </auth>
+                <token> <!-- token信息 -->
+                    <url>https://adpn.gree.com/_/token/get</url> <!-- 获取token的url -->
+                    <method>post</method> <!-- 请求token的方法 -->
+                    <Content-Type>application/json</Content-Type> <!-- content-type -->
+                </token>
+            </api>
+            <api id="apidbcmp">
+                <method>get</method>
+                <Content-Type>application/json</Content-Type>
+                <params>offset count</params>
+                <auth>
+                    <username>dbcUser3_api</username>
+                    <password>dbc3basem@2020</password>
+                    <secureKey>pwgB47RKrRu5hpNe</secureKey>
+                </auth>
+                <token>
+                    <url>https://adpn.gree.com/_/token/get</url>
+                    <method>post</method>
+                    <Content-Type>application/json</Content-Type>
+                </token>
+            </api>
+            <api id="xxxxstock">
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params>offset count erpid</params>
+                <auth>
+                    <username>biguser</username>
+                    <password>123456</password>
+                    <secureKey>Br3GZLL4POMpOVLV</secureKey>
+                </auth>
+                <token>
+                    <url>https://adpn.gree.com/_/token/get</url>
+                    <method>post</method>
+                    <Content-Type>application/json</Content-Type>
+                </token>
+            </api>
+            <api id="materieltype">
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params>offset count</params>
+                <auth>
+                    <username>biguser</username>
+                    <password>123456</password>
+                    <secureKey>Br3GZLL4POMpOVLV</secureKey>
+                </auth>
+                <token>
+                    <url>https://adpn.gree.com/_/token/get</url>
+                    <method>post</method>
+                    <Content-Type>application/json</Content-Type>
+                </token>
+            </api>
+            <api id="stocktransaction1">
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params>offset count startdate enddate</params>
+                <auth>
+                    <username>biguser</username>
+                    <password>123456</password>
+                    <secureKey>Br3GZLL4POMpOVLV</secureKey>
+                </auth>
+                <token>
+                    <url>https://adpn.gree.com/_/token/get</url>
+                    <method>post</method>
+                    <Content-Type>application/json</Content-Type>
+                </token>
+            </api>
+            <api id="_"> <!-- id为"_"表示除了特殊以外所有其它接口的配置 -->
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params>offset count</params>
+                <auth>
+                    <username>biguser_erp_norm_reader1</username>
+                    <password>benr1200817</password>
+                    <secureKey>k72Ybb7pal7gOTaI</secureKey>
+                </auth>
+                <token>
+                    <url>https://adpn.gree.com/_/token/get</url>
+                    <method>post</method>
+                    <Content-Type>application/json;charset=UTF-8</Content-Type>
+                </token>
+            </api>
+        </type>
+
+        <type id="bann_api">
+            <api>
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params> </params>
+                <auth>
+                    <client_id>31T417</client_id>
+                    <grant_type>client_credentials</grant_type>
+                    <client_secret>q44Pv7</client_secret>
+                </auth>
+                <token>
+                    <url>http://baanApp.gree.com/MICROSERVICEAUTH/oauth/token</url>
+                    <method>get</method>
+                    <Content-Type>application/json</Content-Type>
+                </token>
+            </api>
+        </type>
+
+        <type id="mes_api">
+            <api id="_">
+                <method>post</method>
+                <Content-Type>application/json</Content-Type>
+                <params>fromDate toDate CompanyID</params>
+                <auth>
+                    <authStr>username=260371&amp;password=260371&amp;client_id=clientForBigDataApi&amp;client_secret=secret&amp;scope=apiForGreeMesBigDataPermission%20offline_access&amp;grant_type=password</authStr>
+                    <User-Agent>Fiddler</User-Agent>
+                </auth>
+                <token>
+                    <url>https://sysapp.gree.com/greemesidentityserver/connect/token</url>
+                    <method>post</method>
+                    <Content-Type>application/x-www-form-urlencoded</Content-Type>
+                </token>
+            </api>
+        </type>
+
+    </apis>
+
+    <table>
+        <!-- 更新模式: full,fullpart,delta,deltapart。target为kudu时不能设置part和deltapart-->
+        <!-- 重要参数，配置错误会导致主逻辑进入错误分支-->
+        <update_type>deltapart</update_type>
+
+        <!-- 增量模式：T0(查询上次增量字段极值，随时取增量，并记录增量字段极值）;T1(取前一天）-->
+        <!-- 重要参数，配置错误会导致主逻辑进入错误分支-->
+        <delta_mode>T0</delta_mode>
+
+        <!-- 手动配置类型转换规则,【;】区分不同规则,【-】前后为转换对-->
+        <type_cast>date-string;decimal-double</type_cast>
+
+        <!-- 数据源 -->
+        <source>
+            <!-- 数据源类型：oracle/sqlserver/mysql -->
+            <type>oracle</type>
+
+            <!-- jdbc连接信息，url、user、password分别填写，url必须写库名 -->
+            <url>jdbc:oracle:thin:@//10.2.28.169:1521/PGXT</url>
+            <user>dsjpgxt</user>
+            <password>gree2017dsjpgxt</password>
+
+            <!-- 数据源表所在的库名，用于获取元数据的注释 -->
+            <db>PGXT</db>
+
+            <!-- 源表名：【;】分隔每张表，【*】代表取全库表格，仅供全量表使用 -->
+            <table_name>tbl_wxjs_jykt;tbl_wxjs_pjmx_jykt;tbl_wxjs_wxxm_jykt;tbl_wxjs_xxyy_jykt</table_name>
+
+            <!-- 源表增量字段，【;】分隔不同表格增量字段，【-】分隔同一表格多个增量字段 -->
+            <!-- 需与table_name一一对应 -->
+            <delta_field>cjdt-xgrq;pjcjdt;cjsj;cjsj</delta_field>
+        </source>
+
+        <target>
+            <!-- 目标表类型：hive,kudu -->
+            <type>hive</type>
+
+            <!-- 目标表库名 -->
+            <db>neoj_njl</db>
+
+            <!-- hive/kudu目标表名：【;】分隔每张表，需与source的table_name一一对应，且命名需符合数仓命名规则 -->
+            <!-- 根据数仓命名规则，前缀：ods层(ods_),cdm层(dwd_/dws_),dwt层(dwt_),ads层(ads_) -->
+            <!-- 依据数仓命名规则，全量无后缀，hive增量(_delta),hive增量分区(_delta_part),kudu增量(_delta_kudu) -->
+            <table_name>ods_tbl_wxjs_jykt_delta_part;ods_tbl_wxjs_pjmx_jykt_delta_part;ods_tbl_wxjs_wxxm_jykt_delta_part;ods_tbl_wxjs_xxyy_jykt_delta_part</table_name>
+
+            <!-- 目标表增量字段，【;】分隔不同表格增量字段，【-】分隔同一表格多个增量字段 -->
+            <!-- 需与table_name一一对应 -->
+            <delta_field>cjdt-xgrq;pjcjdt;cjsj;cjsj</delta_field>
+
+            <!-- 目标表分区字段，【;】分隔不同表格的分区字段，【-】前为分区依据字段，【-】后为分区程度信息year(仅分区到年),month(分区到年月),day(分区到年月日)-->
+            <partition_field>cjdt-month;pjcjdt-month;cjsj-month;cjsj-month</partition_field>
+        </target>
+    </table>
+</configuration>
