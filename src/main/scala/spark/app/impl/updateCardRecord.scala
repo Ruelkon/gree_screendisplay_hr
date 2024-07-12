@@ -12,7 +12,7 @@ import spark.service.{getHrDataAccordingToCardRecord, insertIntoHrBigTable}
  */
 class updateCardRecord extends BaseSparkApp {
   /**
-   * 更新打卡记录表，每半个小时更新一次
+   * 更新打卡记录表，产品要求每半个小时更新一次
    */
   override def onRun(): Unit = {
     val runSpark = spark
@@ -20,4 +20,10 @@ class updateCardRecord extends BaseSparkApp {
   }
 }
 
+
+object updateCardRecord {
+  def main(args: Array[String]): Unit = {
+    new updateCardRecord().startApp()
+  }
+}
 
