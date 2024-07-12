@@ -53,17 +53,19 @@ class getHrDataAccordingToCardRecord(spark: SparkSession) {
 //        jsonSinkHiveFiftyday(https2,"SignDate","hr_card_record","signdate")
         )
       }, "ex2", errList)
-    actorUtil.doSthAndCollectException(
-      {
-        //day_attendance表
-        val https3 = "https://hrapi.gree.com/apiv2/attendance/interface21"
-        //按时间段更新数据,需要设置起始日期参数，生效参数是startDate和endData，指定日期参数无效
-        //        jsonSinkHive(https3,"Date","hr_day_attendance","Date")
-        //按天更新，需要设置指定日期参数,生效参数是getHrDateAccordingToDate.oneDay，时间段参数无效
-        //        jsonSinkHiveOneDay(https3,"Date","hr_day_attendance","Date")
-        //该方法按天更新，用来在半小时一更中使用,目前没有这个更新的需求
-//        jsonSinkHiveCurrentDay(https3,"Date","hr_day_attendance","date")
-      }, "ex3", errList)
+
+//    目前不用每半小时更新了
+//    actorUtil.doSthAndCollectException(
+//      {
+//        //day_attendance表
+//        val https3 = "https://hrapi.gree.com/apiv2/attendance/interface21"
+//        //按时间段更新数据,需要设置起始日期参数，生效参数是startDate和endData，指定日期参数无效
+//        //        jsonSinkHive(https3,"Date","hr_day_attendance","Date")
+//        //按天更新，需要设置指定日期参数,生效参数是getHrDateAccordingToDate.oneDay，时间段参数无效
+//        //        jsonSinkHiveOneDay(https3,"Date","hr_day_attendance","Date")
+//        //该方法按天更新，用来在半小时一更中使用,目前没有这个更新的需求
+////        jsonSinkHiveCurrentDay(https3,"Date","hr_day_attendance","date")
+//      }, "ex3", errList)
 
     println("输入成功")
     logger.error(errList)
